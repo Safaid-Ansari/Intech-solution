@@ -1,1 +1,273 @@
 
+question 1 : Stirng Compression 
+
+ 
+
+// Java program to implement run length encoding answer\
+import java.util.*;
+class Run_Length_Encoding { 
+	static void compressionString(String str) 
+	{ 
+		int n = str.length(); 
+		for (int i = 0; i < n; i++) { 
+
+			// Count occurrences of current character 
+			int count = 1; 
+			while (i < n - 1 && 
+				str.charAt(i) == str.charAt(i + 1)) { 
+				count++; 
+				i++; 
+			} 
+              // print the charracter and its count 
+			if (count == 1) {
+			  System.out.print(str.charAt(i) + "1"); 
+      } 
+      else {
+			  System.out.print(str.charAt(i)); 
+  			System.out.print(count); 
+      }
+		} 
+	} 
+
+	public static void main(String[] args) 
+	{ 
+	    Scanner s = new Scanner(System.in);
+	    
+		String str = s.next(); 
+		compressionString(str); 
+	} 
+} 
+
+
+question 2: program find to nth element of a linked list 
+
+
+// Java program to find N'th node from
+// end of linked list
+class LinkedList {
+	Node head; // head of the list
+
+	/* Linked List node */
+	class Node {
+		int data;
+		Node next;
+		Node(int d)
+		{
+			data = d;
+			next = null;
+		}
+	}
+
+	/* Function to get the Nth node from the last of a
+	linked list */
+	void printNthFromLast(int N)
+	{
+		int len = 0;
+		Node temp = head;
+
+		// 1) count the number of nodes in Linked List
+		while (temp != null) {
+			temp = temp.next;
+			len++;
+		}
+
+		// check if value of N is not more than length of
+		// the linked list
+		if (len < N)
+			return;
+
+		temp = head;
+
+		// 2) get the (len-N+1)th node from the beginning
+		for (int i = 1; i < len - N + 1; i++)
+			temp = temp.next;
+
+		System.out.println(temp.data);
+	}
+
+	/* Inserts a new Node at front of the list. */
+	public void push(int new_data)
+	{
+		/* 1 & 2: Allocate the Node &
+				Put in the data*/
+		Node new_node = new Node(new_data);
+
+		/* 3. Make next of new Node as head */
+		new_node.next = head;
+
+		/* 4. Move the head to point to new Node */
+		head = new_node;
+	}
+
+	// Driver's code
+	public static void main(String[] args)
+	{
+		LinkedList llist = new LinkedList();
+		llist.push(20);
+		llist.push(4);
+		llist.push(15);
+		llist.push(35);
+		
+		// Function call
+		llist.printNthFromLast(4);
+	}
+} // This code is contributed by Rajat Mishra
+
+
+
+now find the kth to the last element 
+
+
+// A Linked List Node
+class Node
+{
+    int data;
+    Node next;
+ 
+    Node(int data, Node next)
+    {
+        this.data = data;
+        this.next = next;
+    }
+}
+ 
+class Main
+{
+    // Iterative function to return the k'th node from the end in a linked list
+    public static Node findKthNode(Node head, int k)
+    {
+        int n = 0;
+        Node curr = head;
+ 
+        // count the total number of nodes in the linked list
+        while (curr != null)
+        {
+            curr = curr.next;
+            n++;
+        }
+ 
+        // if the total number of nodes is more than or equal to `k`
+        if (n >= k)
+        {
+            // return (n-k+1)'th node from the beginning
+            curr = head;
+            for (int i = 0; i < n - k; i++) {
+                curr = curr.next;
+            }
+        }
+ 
+        return curr;
+    }
+ 
+    public static void main(String[] args)
+    {
+        // input keys
+        int[] keys = { 1, 2, 3, 4, 5 };
+ 
+        Node head = null;
+        for (int i = keys.length - 1; i >= 0; i--) {
+            head = new Node(keys[i], head);
+        }
+ 
+        int k = 3;
+        Node node = findKthNode(head, k);
+ 
+        if (node != null) {
+            System.out.println("k'th node from the end is " + node.data);
+        }
+    }
+}
+
+
+
+question 3: 
+
+
+get min method 
+ // stack principle  first in last out  
+ void getMin()
+    {
+        // Get the minimum number in the entire stack
+        if (s.isEmpty())
+            System.out.println("Stack is empty");
+ 
+        // variable minEle stores the minimum element
+        // in the stack.
+        else
+            System.out.println("Minimum Element in the "
+                               + " stack is: " + minEle);
+    }
+ 
+
+
+question 4: 
+
+
+trapping rain water 
+
+public static int trapping_rain_water(int[] A, int N)
+{
+    int res = 0;
+    for(int i = 0; i < N ; i++)
+    { 
+        int left_max= arr[i];
+        for(int j = i - 1; j >= 0; j--)
+        {
+            left_max = Math.max(left_max, A[j]);
+        }
+        int right_max = A[i];
+        for(int j = i + 1; j < n; j++)
+        {
+            right_max = Math.max(right_max, A[j]);
+        }
+        res += Math.min(left_max, right_max) - A[i];
+    }
+    return res;
+}
+
+question 5: coin change 
+
+public static int coinChange(int[] S, int sum)
+    {
+        if (sum == 0) {
+            return 0;
+        }
+        if (sum < 0) {
+            return Integer.MAX_VALUE;
+        }
+        int coins = Integer.MAX_VALUE;
+        for (int c: S)
+        {
+            int result = coinChange(S, sum - c);
+
+            if (result != Integer.MAX_VALUE) {
+                coins = Integer.min(coins, result + 1);
+            }
+        }
+        return coins;
+    }
+
+
+question 5: what is dot product and cross product 
+
+The cross product is mostly used to determine the vector, which is perpendicular to the plane surface spanned by two vectors, whereas the dot product is used to find the angle between two vectors or the length of the vector.
+
+ 
+ 
+ question 7: explain computer architecture 
+   
+ In computer engineering, computer architecture is a set of rules and methods that describe the functionality, organization, and implementation of computer systems. The architecture of a system refers to its structure in terms of separately specified components of that system and their interrelationships.[1]
+
+Some definitions of architecture define it as describing the capabilities and programming model of a computer but not a particular implementation.[2] In other definitions computer architecture involves instruction set architecture design, microarchitecture design, logic design, and implementation.[3]
+ 
+
+question 8:  random crashes problem 
+
+If you assume there is a single error and the application crashes in different places, it might be a dangling pointer. Accessing an already freed piece of memory will give you rubbish values (probably a segfault in most cases), they will be seemingly randomly overwritten as the application creates and destroys variables and does memory operations. This could be as easy as a missing malloc or a free too much.
+
+However, I wouldn't bother to debug the app at all if first attempts don't reveal the source of the problem. If an application crashes in ten different places, when the app uses seemingly unrelated data, the author surely has written tons and tons of code without ever compiling and testing it in the process and now is helpless because one error led to another. I would politely ask the app's programmer to have an intercourse with himself, and after he's done, to rewrite the faulty code from scratch, compiling and testing every few lines.
+
+
+favorite subject 
+
+JavaScript and Node js 
